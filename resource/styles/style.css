@@ -1,4 +1,134 @@
-/* Shared custom CSS */
-body {
-    font-family: 'Arial', sans-serif;
-}
+/* =============================================
+   BrandPulse — Shared Stylesheet
+   Part 1: Base variables, sidebar, topbar
+   ============================================= */
+
+/* --- Variables --- */
+:root {
+    --primary:    #2c5f8a;
+    --primary-dk: #1e4266;
+    --accent:     #3a8fd4;
+    --positive:   #2e7d50;
+    --neutral:    #7a6e00;
+    --negative:   #b53b3b;
+    --sidebar-w:  220px;
+    --text-main:  #212529;
+    --text-muted: #6c757d;
+    --bg-light:   #f4f6f9;
+    --border:     #dee2e6;
+  }
+  
+  /* --- Base --- */
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    margin: 0;
+  }
+  
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+  
+  /* --- Sidebar --- */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background-color: var(--primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+  }
+  
+  .sidebar-brand {
+    padding: 18px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  
+  .sidebar-brand span { color: #7ec8f5; }
+  
+  .sidebar-nav {
+    list-style: none;
+    padding: 12px 0;
+    margin: 0;
+    flex: 1;
+  }
+  
+  .sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  
+  .sidebar-nav li a:hover,
+  .sidebar-nav li a.active {
+    background-color: var(--primary-dk);
+    color: #fff;
+  }
+  
+  .sidebar-footer {
+    padding: 14px 20px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+  
+  /* --- Main Wrapper --- */
+  .main-wrapper {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* --- Topbar --- */
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  
+  .topbar-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  
+  /* --- Page Content --- */
+  .page-content {
+    padding: 28px;
+    flex: 1;
+  }
+  
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .sidebar { width: 100%; min-height: auto; position: relative; }
+    .main-wrapper { margin-left: 0; }
+    .page-content { padding: 16px; }
+  }
