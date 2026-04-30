@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandPulse — Competitor Analysis</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">Brand<span>Pulse</span></div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html"><i class="fa fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="feed.html"><i class="fa fa-newspaper"></i> Media Feed</a></li>
+      <li><a href="competitor.html" class="active"><i class="fa fa-chart-bar"></i> Competitor</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <i class="fa fa-user-circle me-1"></i> Alex Chen &nbsp;·&nbsp;
+      <a href="login.html" style="color:rgba(255,255,255,0.5);">Sign out</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ── -->
+  <div class="main-wrapper">
+    <div class="topbar">
+      <span class="topbar-title">Competitor Analysis</span>
+      <div class="topbar-right">
+        <span><i class="fa fa-bell text-warning me-1"></i> 3 alerts</span>
+        <span class="text-muted">4 brands tracked</span>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Insight banner -->
+      <div class="alert alert-info mb-4" style="font-size:0.88rem;">
+        <i class="fa fa-lightbulb me-2"></i>
+        <strong>Insight:</strong> Tesla carries the highest negative coverage rate this period at 40%,
+        while Apple leads overall with a sentiment score of 7.4.
+        Apple's positive coverage outpaces the group average by 18pp.
+      </div>
+
+      <div class="row g-3">
+
+        <!-- Left: Brand comparison table -->
+        <div class="col-lg-7">
+          <div class="card">
+            <div class="card-header-custom d-flex justify-content-between align-items-center">
+              <span>Brand Sentiment Comparison</span>
+              <div>
+                <input type="text" class="form-control form-control-sm" id="brand-search" placeholder="Search brand…"
+                  style="width:160px;" oninput="filterBrands()">
+              </div>
+            </div>
+            <div class="p-3" id="brand-list">
+
+
+              <div class="p-3" id="brand-list"></div>
+
+              
+              <!-- Apple 
+              <div class="brand-row" data-brand="Apple">
+                <div class="brand-name">
+                  <span class="badge me-1"
+                    style="background:#0d2b4e;width:10px;height:10px;display:inline-block;border-radius:50%;padding:0;"></span>
+                  Apple
+                </div>
+                <div class="brand-bar-wrap">
+                  <div class="d-flex" style="height:8px;border-radius:4px;overflow:hidden;">
+                    <div style="width:61%;background:var(--positive);"></div>
+                    <div style="width:24%;background:#d4ac0d;"></div>
+                    <div style="width:15%;background:var(--negative);"></div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-1" style="font-size:0.72rem;color:var(--text-muted);">
+                    <span>61% pos</span><span>24% neu</span><span>15% neg</span>
+                  </div>
+                </div>
+                <div class="brand-score" style="color:var(--positive);">7.4</div>
+                <div style="font-size:0.78rem;color:var(--text-muted);width:60px;text-align:right;">2,841 arts</div>
+              </div>
+            -->
+              <!-- Google 
+              <div class="brand-row" data-brand="Google">
+                <div class="brand-name">
+                  <span class="badge me-1"
+                    style="background:#34a853;width:10px;height:10px;display:inline-block;border-radius:50%;padding:0;"></span>
+                  Google
+                </div>
+                <div class="brand-bar-wrap">
+                  <div class="d-flex" style="height:8px;border-radius:4px;overflow:hidden;">
+                    <div style="width:58%;background:var(--positive);"></div>
+                    <div style="width:28%;background:#d4ac0d;"></div>
+                    <div style="width:14%;background:var(--negative);"></div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-1" style="font-size:0.72rem;color:var(--text-muted);">
+                    <span>58% pos</span><span>28% neu</span><span>14% neg</span>
+                  </div>
+                </div>
+                <div class="brand-score" style="color:var(--positive);">6.9</div>
+                <div style="font-size:0.78rem;color:var(--text-muted);width:60px;text-align:right;">3,102 arts</div>
+              </div>
+-->
+              <!-- Microsoft 
+              <div class="brand-row" data-brand="Microsoft">
+                <div class="brand-name">
+                  <span class="badge me-1"
+                    style="background:#0078d4;width:10px;height:10px;display:inline-block;border-radius:50%;padding:0;"></span>
+                  Microsoft
+                </div>
+                <div class="brand-bar-wrap">
+                  <div class="d-flex" style="height:8px;border-radius:4px;overflow:hidden;">
+                    <div style="width:55%;background:var(--positive);"></div>
+                    <div style="width:31%;background:#d4ac0d;"></div>
+                    <div style="width:14%;background:var(--negative);"></div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-1" style="font-size:0.72rem;color:var(--text-muted);">
+                    <span>55% pos</span><span>31% neu</span><span>14% neg</span>
+                  </div>
+                </div>
+                <div class="brand-score" style="color:var(--positive);">6.5</div>
+                <div style="font-size:0.78rem;color:var(--text-muted);width:60px;text-align:right;">1,987 arts</div>
+              </div>
+-->
+              <!-- Tesla 
+              <div class="brand-row" data-brand="Tesla">
+                <div class="brand-name">
+                  <span class="badge me-1"
+                    style="background:#c0392b;width:10px;height:10px;display:inline-block;border-radius:50%;padding:0;"></span>
+                  Tesla
+                </div>
+                <div class="brand-bar-wrap">
+                  <div class="d-flex" style="height:8px;border-radius:4px;overflow:hidden;">
+                    <div style="width:38%;background:var(--positive);"></div>
+                    <div style="width:22%;background:#d4ac0d;"></div>
+                    <div style="width:40%;background:var(--negative);"></div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-1" style="font-size:0.72rem;color:var(--text-muted);">
+                    <span>38% pos</span><span>22% neu</span><span>40% neg</span>
+                  </div>
+                </div>
+                <div class="brand-score" style="color:var(--negative);">4.2</div>
+                <div style="font-size:0.78rem;color:var(--text-muted);width:60px;text-align:right;">4,210 arts</div>
+              </div>
+-->
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Summary stats -->
+        <div class="col-lg-5">
+          <div class="card mb-3">
+            <div class="card-header-custom">Summary</div>
+            <div class="p-3">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Brand</th>
+                    <th>Score</th>
+                    <th>Articles</th>
+                    <th>Neg %</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Apple</strong></td>
+                    <td><span style="color:var(--positive);font-weight:700;">7.4</span></td>
+                    <td>2,841</td>
+                    <td>15%</td>
+                  </tr>
+                  <tr>
+                    <td>Google</td>
+                    <td><span style="color:var(--positive);font-weight:700;">6.9</span></td>
+                    <td>3,102</td>
+                    <td>14%</td>
+                  </tr>
+                  <tr>
+                    <td>Microsoft</td>
+                    <td><span style="color:var(--positive);font-weight:700;">6.5</span></td>
+                    <td>1,987</td>
+                    <td>14%</td>
+                  </tr>
+                  <tr>
+                    <td>Tesla</td>
+                    <td><span style="color:var(--negative);font-weight:700;">4.2</span></td>
+                    <td>4,210</td>
+                    <td>40%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+<div class="card mb-3">
+  <div class="card-header-custom">Sentiment Comparison Chart</div>
+  <div class="p-3">
+    <canvas id="competitorChart"></canvas>
+  </div>
+</div>
+
+
+          <!-- Legend -->
+          <div class="card">
+            <div class="card-header-custom">Coverage Legend</div>
+            <div class="p-3">
+              <div class="d-flex align-items-center gap-2 mb-2" style="font-size:0.85rem;">
+                <div style="width:16px;height:16px;background:var(--positive);border-radius:3px;"></div>
+                Positive coverage
+              </div>
+              <div class="d-flex align-items-center gap-2 mb-2" style="font-size:0.85rem;">
+                <div style="width:16px;height:16px;background:#d4ac0d;border-radius:3px;"></div>
+                Neutral coverage
+              </div>
+              <div class="d-flex align-items-center gap-2" style="font-size:0.85rem;">
+                <div style="width:16px;height:16px;background:var(--negative);border-radius:3px;"></div>
+                Negative coverage
+              </div>
+              <hr>
+              <small class="text-muted">Data period: last 30 days</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/competitor.js"></script>
+</body>
+
+</html>
