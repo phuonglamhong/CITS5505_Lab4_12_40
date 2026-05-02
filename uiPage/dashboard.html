@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandPulse — Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">Brand<span>Pulse</span></div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html" class="active"><i class="fa fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="feed.html"><i class="fa fa-newspaper"></i> Media Feed</a></li>
+      <li><a href="competitor.html"><i class="fa fa-chart-bar"></i> Competitor</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <i class="fa fa-user-circle me-1"></i> Alex Chen &nbsp;·&nbsp;
+      <a href="login.html" style="color:rgba(255,255,255,0.5);">Sign out</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ── -->
+  <div class="main-wrapper">
+    <div class="topbar">
+      <span class="topbar-title">Dashboard</span>
+      <div class="topbar-right">
+        <span><i class="fa fa-bell text-warning me-1"></i> 3 alerts</span>
+        <span class="text-muted">Apple Inc.</span>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Stat cards row -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-value">7.4</div>
+            <div class="stat-label">Brand Score</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-value">2,841</div>
+            <div class="stat-label">Articles (30d)</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-value" style="color:var(--positive);">61%</div>
+            <div class="stat-label">Positive Coverage</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-value" style="color:var(--negative);">15%</div>
+            <div class="stat-label">Negative Coverage</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4">
+
+        <!-- Sentiment breakdown -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header-custom">Sentiment Breakdown</div>
+            <div class="p-3">
+              <div class="d-flex justify-content-between mb-1" style="font-size:0.85rem;">
+                <span>Positive</span><span class="fw-semibold text-success">61%</span>
+              </div>
+              <div class="score-bar-wrap mb-3">
+                <div class="score-bar-fill" style="width:61%;background:var(--positive);"></div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-1" style="font-size:0.85rem;">
+                <span>Neutral</span><span class="fw-semibold text-warning">24%</span>
+              </div>
+              <div class="score-bar-wrap mb-3">
+                <div class="score-bar-fill" style="width:24%;background:#d4ac0d;"></div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-1" style="font-size:0.85rem;">
+                <span>Negative</span><span class="fw-semibold text-danger">15%</span>
+              </div>
+              <div class="score-bar-wrap">
+                <div class="score-bar-fill" style="width:15%;background:var(--negative);"></div>
+              </div>
+
+              <hr>
+              <small class="text-muted">Based on 2,841 articles in the last 30 days</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Alerts -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header-custom">
+              <i class="fa fa-bell text-warning me-2"></i>Active Alerts
+              <span class="badge bg-warning text-dark ms-1">3</span>
+            </div>
+            <div class="p-3">
+              <div class="alert-item">
+                <div class="alert-title">Supply chain controversy trending</div>
+                <div class="alert-desc">Reuters, FT — 847 mentions in 2 hours · Negative spike +34%</div>
+              </div>
+              <div class="alert-item">
+                <div class="alert-title">CEO interview misquoted</div>
+                <div class="alert-desc">Twitter/X, Bloomberg — Viral thread with negative framing</div>
+              </div>
+              <div class="alert-item">
+                <div class="alert-title">Competitor price war coverage</div>
+                <div class="alert-desc">TechCrunch — Comparative articles disadvantaging brand</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Articles -->
+      <div class="card">
+        <div class="card-header-custom d-flex justify-content-between align-items-center">
+          <span>Recent Articles</span>
+          <a href="feed.html" style="font-size:0.82rem;">View all →</a>
+        </div>
+        <div class="p-3">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Source</th>
+                <th>Sentiment</th>
+                <th>Score</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="recent-articles">
+              <tr>
+                <td><a href="detail.html">Apple unveils breakthrough neural processing chip</a></td>
+                <td>Reuters</td>
+                <td><span class="badge-positive">Positive</span></td>
+                <td>+82</td>
+                <td>2h ago</td>
+              </tr>
+              <tr>
+                <td><a href="detail.html">Supply chain delays impact Apple's Q3 targets</a></td>
+                <td>Financial Times</td>
+                <td><span class="badge-negative">Negative</span></td>
+                <td>-61</td>
+                <td>4h ago</td>
+              </tr>
+              <tr>
+                <td><a href="detail.html">Apple announces annual developer conference dates</a></td>
+                <td>The Verge</td>
+                <td><span class="badge-neutral">Neutral</span></td>
+                <td>+12</td>
+                <td>6h ago</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </div><!-- /main-wrapper -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/dashboard.js"></script>
+</body>
+</html>
