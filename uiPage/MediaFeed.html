@@ -82,9 +82,86 @@
           </div>
         </section>
 
-        <!-- PAGE CONTENT (empty for now) -->
         <div class="content-grid">
-          <p style="color:#888; padding:20px;">Media Feed content coming soon.</p>
+
+          <!-- STAT CARDS -->
+          <section class="stat-grid">
+            <article class="panel stat-card">
+              <div class="stat-head">
+                <span>Total Articles</span>
+                <div class="stat-icon icon-primary">
+                  <i class="fa-regular fa-newspaper"></i>
+                </div>
+              </div>
+              <h3>126</h3>
+              <p>All articles currently indexed across selected media outlets.</p>
+            </article>
+
+            <article class="panel stat-card">
+              <div class="stat-head">
+                <span>Positive</span>
+                <div class="stat-icon icon-success">
+                  <i class="fa-regular fa-face-smile"></i>
+                </div>
+              </div>
+              <h3>68</h3>
+              <p>Coverage emphasizing growth, partnerships, product wins, and earnings strength.</p>
+            </article>
+
+            <article class="panel stat-card">
+              <div class="stat-head">
+                <span>Neutral</span>
+                <div class="stat-icon icon-warning">
+                  <i class="fa-regular fa-face-meh"></i>
+                </div>
+              </div>
+              <h3>34</h3>
+              <p>Balanced reporting with mixed interpretation and limited reputational impact.</p>
+            </article>
+
+            <article class="panel stat-card">
+              <div class="stat-head">
+                <span>Negative</span>
+                <div class="stat-icon icon-danger">
+                  <i class="fa-regular fa-face-frown"></i>
+                </div>
+              </div>
+              <h3>24</h3>
+              <p>Risk-focused reporting requiring closer monitoring and possible communication response.</p>
+            </article>
+          </section>
+
+          <!-- FILTER TABS + SEARCH -->
+          <section class="feed-toolbar">
+            <div class="filter-tabs" role="tablist">
+              <button class="filter-tab active" type="button">All</button>
+              <button class="filter-tab" type="button">Positive</button>
+              <button class="filter-tab" type="button">Neutral</button>
+              <button class="filter-tab" type="button">Negative</button>
+            </div>
+            <div class="toolbar-actions">
+              <label class="select-box">
+                <i class="fa-solid fa-filter"></i>
+                <select>
+                  <option>All Sources</option>
+                  <option>Reuters</option>
+                  <option>BBC</option>
+                  <option>Bloomberg</option>
+                  <option>TechCrunch</option>
+                </select>
+              </label>
+              <label class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search media feed..." />
+              </label>
+            </div>
+          </section>
+
+          <!-- ARTICLE LIST PLACEHOLDER -->
+          <section class="feed-list">
+            <p style="color:#888; padding:20px;">Article list coming soon.</p>
+          </section>
+
         </div>
 
       </main>
