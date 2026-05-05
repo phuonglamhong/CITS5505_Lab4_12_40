@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandPulse — Article Detail</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">Brand<span>Pulse</span></div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html"><i class="fa fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="feed.html" class="active"><i class="fa fa-newspaper"></i> Media Feed</a></li>
+      <li><a href="competitor.html"><i class="fa fa-chart-bar"></i> Competitor</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <i class="fa fa-user-circle me-1"></i> Alex Chen &nbsp;·&nbsp;
+      <a href="login.html" style="color:rgba(255,255,255,0.5);">Sign out</a>
+    </div>
+  </nav>
+
+  <div class="main-wrapper">
+    <div class="topbar">
+      <span class="topbar-title">
+        <a href="feed.html" class="text-muted" style="font-size:0.85rem;">← Feed</a>
+        &nbsp;/&nbsp; Article Detail
+      </span>
+      <div class="topbar-right">
+        <span><i class="fa fa-bell text-warning me-1"></i> 3 alerts</span>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="row g-3">
+
+        <div class="col-lg-8">
+
+          <!-- Article header -->
+          <div class="card mb-3">
+            <div class="p-4">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge-negative" id="article-badge">Negative</span>
+                <span class="text-muted" style="font-size:0.8rem;" id="article-source">Financial Times</span>
+                <span class="text-muted" style="font-size:0.8rem;">·</span>
+                <span class="text-muted" style="font-size:0.8rem;" id="article-date">4h ago</span>
+              </div>
+              <h5 id="article-title" style="font-weight:700;line-height:1.4;">
+                Supply chain delays impact Apple's Q3 production targets amid growing market pressure
+              </h5>
+              <p id="article-body" class="mt-3" style="font-size:0.9rem;color:#495057;line-height:1.7;">
+                Apple's supply chain disruptions have intensified in recent weeks, with multiple suppliers
+                reporting significant delays expected to impact Q3 production targets by as much as 15%.
+                Industry analysts have begun revising estimates downward as the company faces increasing
+                pressure from both logistics partners and component manufacturers.
+                <br><br>
+                The situation has been compounded by geopolitical tensions affecting key manufacturing hubs
+                in Southeast Asia. Three of Apple's primary contract manufacturers have reported capacity
+                constraints, leading to a cascading effect across the product pipeline.
+                <br><br>
+                Despite these challenges, Apple has outlined contingency measures including diversified
+                supplier relationships and strategic inventory buffers built up over the previous two quarters.
+              </p>
+
+              <hr>
+              <div class="d-flex gap-4" style="font-size:0.8rem;color:var(--text-muted);">
+                <span><strong>Shared by:</strong> Sara Mitchell</span>
+                <span><strong>Assigned:</strong> Alex Chen</span>
+                <span><strong>Status:</strong> <span class="badge bg-danger text-white">Escalated</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header-custom">Keywords</div>
+            <div class="p-3 d-flex flex-wrap gap-2" id="article-keywords">
+              <span class="badge bg-light text-dark border">supply chain disruption</span>
+              <span class="badge bg-light text-dark border">production delays</span>
+              <span class="badge bg-light text-dark border">market pressure</span>
+              <span class="badge bg-light text-dark border">analyst downgrade</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header-custom">
+              <i class="fa fa-comments me-2"></i>Comments
+              <span class="badge bg-secondary ms-1" id="comment-count">2</span>
+            </div>
+            <div class="p-3">
+              <div id="comment-list"></div>
+
+              <hr>
+              <div>
+                <label class="form-label" style="font-size:0.85rem;font-weight:600;">Add Comment</label>
+                <textarea id="new-comment" class="form-control mb-2" rows="3"
+                          placeholder="Share your analysis…" style="font-size:0.88rem;"></textarea>
+                <div class="d-flex gap-2 align-items-center">
+                  <select class="form-select form-select-sm" id="comment-tag" style="width:150px;">
+                    <option value="">No tag</option>
+                    <option value="Misclassified">Misclassified</option>
+                    <option value="Flagged">Flagged</option>
+                    <option value="Resolved">Resolved</option>
+                  </select>
+                  <button class="btn btn-primary" onclick="submitComment()">Post Comment</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card mb-3">
+            <div class="card-header-custom">NLP Analysis</div>
+            <div class="p-3">
+              <div class="nlp-panel mb-3">
+                <div class="nlp-row"><span class="nlp-label">Positive</span><span class="nlp-value text-success">18%</span></div>
+                <div class="nlp-row"><span class="nlp-label">Neutral</span><span class="nlp-value text-warning">21%</span></div>
+                <div class="nlp-row"><span class="nlp-label">Negative</span><span class="nlp-value text-danger">61%</span></div>
+                <div class="nlp-row"><span class="nlp-label">Confidence</span><span class="nlp-value">94.2%</span></div>
+                <div class="nlp-row"><span class="nlp-label">Subjectivity</span><span class="nlp-value">63%</span></div>
+                <div class="nlp-row"><span class="nlp-label">Impact Score</span><span class="nlp-value">8.7 / 10</span></div>
+              </div>
+
+              <div class="mb-2" style="font-size:0.82rem;font-weight:600;color:var(--text-muted);">OVERALL SCORE</div>
+              <div style="font-size:2.5rem;font-weight:700;color:var(--negative);">-61</div>
+              <div class="score-bar-wrap mt-1">
+                <div class="score-bar-fill" style="width:61%;background:var(--negative);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header-custom">Article Info</div>
+            <div class="p-3">
+              <div class="nlp-panel">
+                <div class="nlp-row"><span class="nlp-label">ID</span><span class="nlp-value">#2</span></div>
+                <div class="nlp-row"><span class="nlp-label">Source</span><span class="nlp-value">Financial Times</span></div>
+                <div class="nlp-row"><span class="nlp-label">Published</span><span class="nlp-value">4h ago</span></div>
+                <div class="nlp-row"><span class="nlp-label">Reviewed by</span><span class="nlp-value">Jordan Lee</span></div>
+                <div class="nlp-row"><span class="nlp-label">Status</span>
+                  <span class="nlp-value"><span class="badge bg-danger text-white">Escalated</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>const ARTICLE_ID = {{ article_id | default(2) }};</script>
+  <script src="{{ url_for('static', filename='static/js/detail.js') }}"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const ARTICLE_ID = 2;
+</script>
+<script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+</body>
+</html>
