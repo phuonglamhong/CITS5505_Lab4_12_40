@@ -17,17 +17,13 @@ AJAX requests must include the "X-CSRFToken" header.
 """
 
 from flask import (
-    Blueprint, render_template, request, session,
-    url_for, redirect
+    Blueprint, render_template, request, jsonify,
+    session, url_for, redirect
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.user import User
-from app.forms import (
-    LoginForm, RegistForm, ResetPassRequestForm,
-    ResetPassForm, ChangePassForm, DeleteAccountForm
-)
 from app import db
-from datetime import timedelta
+import re
 
 # Blueprint for user-related routes
 users_bp = Blueprint("users", __name__)
@@ -36,112 +32,66 @@ users_bp = Blueprint("users", __name__)
 # Route for rendering the login page
 @users_bp.route("/")
 def index():
-    return render_template(
-        "login.html",
-        login_form=LoginForm(),
-        register_form=RegistForm(),
-        register_success=None,
-        active_tab="signin"
-    )
+    return render_template("login.html")
 
-
-# ---------- REGISTER ----------
+# Route for user registration
 @users_bp.route("/register", methods=["POST"])
 def register():
-    form = RegistForm()
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+    role = data.get("role")
+    password = data.get("password")
 
-    if not form.validate_on_submit():
-        # Re-render page with form errors
-        return render_template(
-            "login.html",
-            login_form=LoginForm(),
-            register_form=form,
-            register_success=None,
-            active_tab="register"
-        )
+    # Validate email format
+    email_regex = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+    if not re.match(email_regex, email):
+        return jsonify({"status": "error", "message": "Invalid email format."})
 
-    # Extract data
-    name = form.name.data
-    email = form.email.data
-    role = form.role.data
-    password = form.password.data
+    # Check if email exists
+    existing = User.query.filter_by(email=email).first()
+    if existing:
+        return jsonify({"status": "error", "message": "Email already registered."})
 
-    # Check existing user
-    if User.query.filter_by(email=email).first():
-        form.email.errors.append("Email already registered.")
-        return render_template(
-            "login.html",
-            login_form=LoginForm(),
-            register_form=form,
-            register_success=None,
-            active_tab="register"
-        )
+    # Create hashed password
+    hashed_pw = generate_password_hash(password)
 
     # Create user
-    hashed_pw = generate_password_hash(password)
-    new_user = User(name=name, email=email, role=role, password=hashed_pw)
+    new_user = User(
+        name=name,
+        email=email,
+        role=role,
+        password=hashed_pw
+    )
 
     db.session.add(new_user)
     db.session.commit()
 
-    # Re-render login page with success alert
-    return render_template(
-        "login.html",
-        login_form=LoginForm(),
-        register_form=RegistForm(),
-        register_success="Account created successfully!",
-        active_tab="register"
-    )
+    return jsonify({"status": "success", "message": "Account created!"})
 
-
-# ---------- LOGIN ----------
+# Route for user login
 @users_bp.route("/login", methods=["POST"])
 def login():
-    form = LoginForm()
-
-    if not form.validate_on_submit():
-        return render_template(
-            "login.html",
-            login_form=form,
-            register_form=RegistForm(),
-            register_success=None,
-            active_tab="signin"
-        )
-
-    email = form.email.data
-    password = form.password.data
-    remember_me = form.remember_me.data
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
 
     user = User.query.filter_by(email=email).first()
 
-    if not user or not check_password_hash(user.password, password):
-        form.email.errors.append("Invalid email or password.")
-        return render_template(
-            "login.html",
-            login_form=form,
-            register_form=RegistForm(),
-            register_success=None
-        )
+    if user and check_password_hash(user.password, password):
+        session["user_id"] = user.id
+        session["user_name"] = user.name
+        return jsonify({"redirect": url_for("users.dashboard")})
+    else:
+        return jsonify({"status": "error", "message": "Invalid email or password."})
 
-    # Login success
-    session["user_id"] = user.id
-    session["user_name"] = user.name
-
-    if remember_me:
-        session.permanent = True
-        users_bp.permanent_session_lifetime = timedelta(days=30)
-
-    return redirect(url_for("users.dashboard"))
-
-
-# ---------- LOGOUT ----------
+# Route for user logout
 @users_bp.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("users.index"))
 
-
-# ---------- DASHBOARD ----------
+# Route for user dashboard (protected route)
 @users_bp.route("/dashboard")
 def dashboard():
     if "user_id" not in session:
