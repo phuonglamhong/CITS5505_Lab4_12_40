@@ -241,7 +241,8 @@
                                resize:vertical; outline:none; box-sizing:border-box;
                                transition:border-color 0.15s;"
                         onfocus="this.style.borderColor='var(--accent)'"
-                        onblur="this.style.borderColor='var(--border)'"></textarea>
+                        onblur="this.style.borderColor='var(--border)'">
+              </textarea>
 
               <div style="display:flex; justify-content:space-between;
                           align-items:center; margin-top:10px;">
@@ -251,12 +252,15 @@
                   <button type="button" onclick="clearForm(this)"
                           class="filter-btn" style="cursor:pointer;">
                     Clear
+                  </button>
                   <button type="submit"
-                        style="padding:7px 22px; border-radius:20px; border:none;
-                                background:#2c5f8a; color:#fff !important; font-size:0.88rem;
-                                 font-weight:600; cursor:pointer; line-height:1.5;
-                                 text-align:center; white-space:nowrap;">
-                       Post
+                          style="padding:7px 22px; border-radius:20px; border:none;
+                                 background:var(--primary); color:#fff; font-size:0.88rem;
+                                 font-weight:600; cursor:pointer; transition:background 0.15s;
+                                 display:inline-block;"
+                          onmouseover="this.style.background='var(--primary-dk)'"
+                          onmouseout="this.style.background='var(--primary)'">
+                    Post
                   </button>
                 </div>
               </div>
