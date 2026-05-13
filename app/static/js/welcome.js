@@ -1,13 +1,29 @@
+/*
+Welcome page functionality.
+
+This file handles:
+- Navigation to login page
+*/
+
+
+// Redirect user to login page.
 function goLogin() {
     window.location.href = "/";
 }
 
+/*
+Intersection Observer for scroll animations.
+
+Adds animation classes when elements
+enter the viewport.
+*/
 
 // Scroll animation
 const observer = new IntersectionObserver(entries => {
 
     entries.forEach(entry => {
 
+        // Animate element when visible
         if (entry.isIntersecting) {
 
             entry.target.classList.add(
@@ -21,6 +37,10 @@ const observer = new IntersectionObserver(entries => {
 
 });
 
+/*
+Apply initial hidden animation styles
+to all animated sections.
+*/
 document.querySelectorAll('.animate-on-scroll').forEach(el => {
 
     el.classList.add(

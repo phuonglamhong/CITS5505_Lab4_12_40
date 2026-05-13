@@ -1,3 +1,16 @@
+/*
+Competitor dashboard functionality.
+
+This file handles:
+- Brand filtering
+- API data fetching
+- Dynamic summary rendering
+- Dynamic chart rendering
+*/
+
+let chart;
+
+// Filter displayed brands using search input. 
 function filterBrands() {
     const query = document.getElementById('brand-search').value.toLowerCase();
 
@@ -10,8 +23,8 @@ function filterBrands() {
             : 'none';
     });
 }
-let chart;
 
+// Render competitor sentiment chart. 
 function loadChart(data) {
 
     const ctx = document.getElementById('competitorChart');
@@ -21,52 +34,7 @@ function loadChart(data) {
     const neutral = data.map(b => b.neu);
     const negative = data.map(b => b.neg);
 
-    if (chart) {
-        chart.destroy();
-    }
-
-    chart = new Chart(ctx, {
-
-        type: 'bar',
-
-        data: {
-            labels: labels,
-
-            datasets: [
-                {
-                    label: 'Positive',
-                    data: positive,
-                    backgroundColor: 'green'
-                },
-                {
-                    label: 'Neutral',
-                    data: neutral,
-                    backgroundColor: 'gold'
-                },
-                {
-                    label: 'Negative',
-                    data: negative,
-                    backgroundColor: 'red'
-                }
-            ]
-        },
-
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
-}
-
-function loadChart(data) {
-
-    const ctx = document.getElementById('competitorChart');
-
-    const labels = data.map(b => b.name);
-    const positive = data.map(b => b.pos);
-    const neutral = data.map(b => b.neu);
-    const negative = data.map(b => b.neg);
-
+    // Destroy existing chart before re-rendering
     if (chart) {
         chart.destroy();
     }
@@ -105,6 +73,7 @@ function loadChart(data) {
 }
 
 
+// Render summary table dynamically.
 function renderSummary(data) {
 
     const summary = document.getElementById('summary-body');
@@ -130,7 +99,7 @@ function renderSummary(data) {
     });
 }
 
-
+// Fetch competitor data from backend API.
 function loadData() {
 
     fetch('/api/competitors')
@@ -146,6 +115,8 @@ function loadData() {
             loadChart(data);
         });
 }
+
+// Load competitor data after page loads.
 document.addEventListener(
     'DOMContentLoaded',
     loadData

@@ -1,14 +1,32 @@
-from flask import Blueprint, render_template, jsonify
+"""
+Competitor analysis routes.
 
+This file contains:
+- Competitor dashboard page route
+- Competitor sentiment API endpoint
+"""
+
+from flask import Blueprint, render_template, jsonify
+# Blueprint for competitor-related routes
 competitor_bp = Blueprint("competitor", __name__)
 
 @competitor_bp.route("/competitor")
 def competitor_page():
+    """
+    Render competitor analysis dashboard page.
+    """
     return render_template("competitor.html")
 
 
 @competitor_bp.route("/api/competitors")
 def competitor_api():
+    
+    """
+    Return competitor sentiment analysis data as JSON.
+
+    Currently uses hardcoded demo data.
+    Future implementation can connect to database models.
+    """
 
     data = [
         {
