@@ -22,7 +22,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///NewsSentimentDB.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['PERMANENT_SESSION_LIFETIME'] = 2592000  # 30 days
-    
+
     # Email configuration - PRODUCTION EXAMPLE (Gmail)
     # app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     # app.config['MAIL_PORT'] = 587
@@ -31,7 +31,7 @@ def create_app():
     # app.config['MAIL_USERNAME'] = 'your-email@gmail.com'
     # app.config['MAIL_PASSWORD'] = 'your-app-password'  # Use App Password, not regular password
     # app.config['MAIL_DEFAULT_SENDER'] = 'your-email@gmail.com'
-    
+
     # Email configuration - DEVELOPMENT (disabled)
     app.config['MAIL_SERVER'] = None  # Disable email sending
     app.config['MAIL_PORT'] = 587
@@ -49,7 +49,6 @@ def create_app():
     # Register models
     from app.models.user import User
     from app.models.article import Article
-    from app.models.comment import Comment
 
     # Register blueprints
     from app.routes.users import users_bp
@@ -58,10 +57,10 @@ def create_app():
     from app.routes.competitor import competitor_bp
     app.register_blueprint(competitor_bp)
 
-    from app.routes.main import main_bp
-    app.register_blueprint(main_bp)
+    from app.routes.feed import feed_bp          # Media Feed (Task 3)
+    app.register_blueprint(feed_bp)
 
-    from app.routes.comments import comments_bp
-    app.register_blueprint(comments_bp)
+    from app.routes.dashboard import dashboard_bp  # Dashboard (Task 3)
+    app.register_blueprint(dashboard_bp)
 
     return app
