@@ -2,6 +2,7 @@
 let chart;
 
 
+
 // Filters competitor brand rows dynamically based on search input.
 function filterBrands() {
 
@@ -291,6 +292,63 @@ function addDiscussion() {
     // Clear input after posting
     input.value = '';
 }
+
+
+// Allows users to post collaboration discussion comments dynamically.
+function addDiscussion() {
+
+    const input =
+        document.getElementById('discussion-input');
+
+    const discussionList =
+        document.getElementById('discussion-list');
+
+    const text =
+        input.value.trim();
+
+    // Prevent empty submissions
+    if (text === '') {
+
+        alert('Please enter a discussion comment.');
+
+        return;
+    }
+
+    // Create new discussion card
+    const discussionItem =
+        document.createElement('div');
+
+    discussionItem.className =
+        'discussion-item mb-3 p-3 border rounded';
+
+    discussionItem.innerHTML = `
+
+        <div class="d-flex justify-content-between">
+
+            <strong>Team Member</strong>
+
+            <span class="badge bg-primary">
+                New Comment
+            </span>
+
+        </div>
+
+        <p class="mt-2 mb-1">
+            ${text}
+        </p>
+
+        <small class="text-muted">
+            Just now
+        </small>
+    `;
+
+    // Add newest comment at top
+    discussionList.prepend(discussionItem);
+
+    // Clear input after posting
+    input.value = '';
+}
+
 
 
 // Loads competitor data when page finishes loading.
