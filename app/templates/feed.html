@@ -11,6 +11,7 @@
     <ul class="sidebar-nav">
       <li><a href="{{ url_for('main.dashboard') }}"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
       <li><a href="{{ url_for('main.feed') }}" class="active"><i class="fa-regular fa-newspaper"></i> Media Feed</a></li>
+      <li><a href="{{ url_for('upload.upload') }}"><i class="fa-solid fa-upload"></i> Upload to Analysis</a></li>
       <li><a href="{{ url_for('competitor.competitor_page') }}"><i class="fa-solid fa-scale-balanced"></i> Competitors</a></li>
       <li><a href="{{ url_for('comments.comments_page') }}"><i class="fa-regular fa-comments"></i> Discussion</a></li>
     </ul>
@@ -131,4 +132,4 @@
 
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
-{% endblock %}S
+{% endblock %}
