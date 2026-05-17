@@ -33,9 +33,10 @@ class SentimentAnalyzer:
             polarity = blob.sentiment.polarity
             subjectivity = blob.sentiment.subjectivity
 
-            if polarity > 0.1:
+            #Balanced threshold for news article sentiment detection
+            if polarity > 0.05:
                 sentiment = "positive"
-            elif polarity < -0.1:
+            elif polarity < -0.05:
                 sentiment = "negative"
             else:
                 sentiment = "neutral"
@@ -77,9 +78,8 @@ class SentimentAnalyzer:
 
         positive = sum(1 for r in results if r["sentiment"] == "positive")
         negative = sum(1 for r in results if r["sentiment"] == "negative")
-        neutral = sum(1 for r in results if r["sentiment"] == "neutral")
-
-        total = len(texts)
+        neutral  = sum(1 for r in results if r["sentiment"] == "neutral")
+        total    = len(texts)
 
         return {
             "total": total,
@@ -88,13 +88,9 @@ class SentimentAnalyzer:
             "neutral": neutral,
             "positive_pct": round(positive / total * 100, 1),
             "negative_pct": round(negative / total * 100, 1),
-            "neutral_pct": round(neutral / total * 100, 1),
-
-            # Pie chart data
+            "neutral_pct":  round(neutral  / total * 100, 1),
             "chart_labels": ["Positive", "Negative", "Neutral"],
             "chart_values": [positive, negative, neutral],
-
-            # Raw results
             "details": results
         }
 
