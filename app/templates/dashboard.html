@@ -10,6 +10,7 @@
     <ul class="sidebar-nav">
       <li><a href="{{ url_for('main.dashboard') }}" class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
       <li><a href="{{ url_for('main.feed') }}"><i class="fa-regular fa-newspaper"></i> Media Feed</a></li>
+      <li><a href="{{ url_for('upload.upload') }}"><i class="fa-solid fa-upload"></i> Upload to Analysis</a></li>
       <li><a href="{{ url_for('competitor.competitor_page') }}"><i class="fa-solid fa-scale-balanced"></i> Competitors</a></li>
       <li><a href="{{ url_for('comments.comments_page') }}"><i class="fa-regular fa-comments"></i> Discussion</a></li>
     </ul>
@@ -87,9 +88,7 @@
         </div>
 
         <div class="article-title">
-          <a href="{{ url_for('comments.comments_page') }}">
-            {{ article.title }}
-          </a>
+          <a href="{{ url_for('comments.comments_page') }}">{{ article.title }}</a>
         </div>
 
         {% if article.content %}
